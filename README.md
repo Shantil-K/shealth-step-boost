@@ -34,9 +34,10 @@ Samsung Health saves steps in one-minute buckets (`PedometerSContextManager$SCon
 ## Build and install
 
 ```bash
-./build.sh                       # produces build/StepBoost.apk (no Gradle needed)
-adb install -r build/StepBoost.apk
+./build-module.sh   # builds build/StepBoost.apk and the flashable build/shealth_step_boost.zip
 ```
+
+Flash `build/shealth_step_boost.zip` in KernelSU (or Magisk/APatch). It installs the hook APK and adds the WebUI control panel. If you only want the hook, use `./build.sh` and `adb install -r build/StepBoost.apk`.
 
 Then, in the Vector/LSPosed manager:
 1. Enable **Step Boost for Samsung Health**.
@@ -45,9 +46,21 @@ Then, in the Vector/LSPosed manager:
 
 `build.sh` compiles against small stubs of the Xposed API in `stubs/`. They're only used for compiling and aren't packaged, because the framework provides the real classes at runtime.
 
+## WebUI control panel
+
+The flashable zip includes a WebUI. Open it from the module's card in **KernelSU / KernelSU Next**, or with **KSU WebUI Standalone** or **MMRL** on Magisk/APatch.
+
+- **Today:** Samsung Health's step total, progress toward the daily target, simulated steps so far, current pace and estimated finish time. It warns you if the target can't be reached before midnight.
+- **Simulation:** on/off switch, pace slider (20–229 steps/min), and daily target with 10k / 25k / 50k / 100k presets.
+- **Boost:** multiplier and cap per minute for real walking.
+- **Status:** Samsung Health version (flags untested versions), step service running, hook APK installed, and hook loaded in the current process. A button restarts Samsung Health.
+- **Recent activity:** the module's latest log lines.
+
+The panel refreshes every 15 seconds. It writes the same `settings` keys listed below, and it reads its data through `status.sh`. Opened in a normal browser, it shows sample data in demo mode.
+
 ## Settings
 
-Everything is controlled through `settings` keys over adb. There's no app UI, and changes take effect within about a minute without a restart.
+Everything is controlled through `settings` keys, from the WebUI or over adb. Changes take effect within about a minute without a restart.
 
 | Key | Default | Meaning |
 |---|---|---|

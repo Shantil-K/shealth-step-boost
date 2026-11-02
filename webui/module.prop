@@ -1,0 +1,6 @@
+id=shealth_step_boost
+name=Samsung Health Step Boost (WebUI)
+version=v1.0
+versionCode=1
+author=Shantil-K
+description=Control panel for the Step Boost Xposed module: boost, step simulation and live progress.
