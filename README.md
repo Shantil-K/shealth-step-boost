@@ -15,6 +15,12 @@ Both feed Samsung Health's own pedometer pipeline, the same path the phone's ste
 
 Open **Step Boost** from your launcher, or tap the module's settings icon in Vector/LSPosed.
 
+<p align="center">
+  <img src="docs/app-top.png" width="300" alt="Step Boost: today's progress, simulation and boost settings">
+  &nbsp;
+  <img src="docs/app-bottom.png" width="300" alt="Step Boost: status and recent activity">
+</p>
+
 - **Today:** Samsung Health's step total, read live from the app, plus progress toward the daily target, simulated steps so far, current pace and estimated finish time. It warns you if the target can't be reached before midnight.
 - **Simulation:** on/off switch, pace (20–229 steps/min, as a slider or typed in) and daily target, with 10k / 25k / 50k / 100k shortcuts.
 - **Boost real walking:** on/off switch, multiplier and cap per minute.
@@ -46,7 +52,11 @@ Samsung Health saves steps in one-minute buckets (`PedometerSContextManager$SCon
 - Samsung Health 7.1.0
 - Android SDK (build-tools 36.0.0 and platform android-35) and JDK 17 or newer, to build
 
-## Build and install
+## Install
+
+**Ready-made APK:** download `StepBoost-v2.0.apk` from [Releases](https://github.com/Shantil-K/shealth-step-boost/releases/latest) and install it.
+
+**Or build it yourself:**
 
 ```bash
 ./build.sh                          # builds build/StepBoost.apk (no Gradle needed)

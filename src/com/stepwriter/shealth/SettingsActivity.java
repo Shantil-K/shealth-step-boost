@@ -304,7 +304,8 @@ public class SettingsActivity extends Activity implements SharedPreferences.OnSh
         scroll.setOnApplyWindowInsetsListener((v, insets) -> {
             int top = insets.getInsets(WindowInsets.Type.systemBars()).top;
             int bottom = insets.getInsets(WindowInsets.Type.systemBars()).bottom;
-            root.setPadding(dp(16), top + dp(12), dp(16), bottom + dp(32));
+            v.setPadding(0, top, 0, 0); // keep scrolled content below the status bar
+            root.setPadding(dp(16), dp(12), dp(16), bottom + dp(32));
             return insets;
         });
 
