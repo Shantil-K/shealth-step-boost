@@ -1,11 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.stepwriter.shealth" android:versionCode="1" android:versionName="1.0">
+    package="com.stepwriter.shealth" android:versionCode="2" android:versionName="2.0">
     <uses-sdk android:minSdkVersion="30" android:targetSdkVersion="35" />
-    <application android:label="Step Boost for Samsung Health" android:hasCode="true">
+
+    <!-- Lets the app ping the hook inside Samsung Health. -->
+    <queries>
+        <package android:name="com.sec.android.app.shealth" />
+    </queries>
+
+    <application
+        android:label="Step Boost"
+        android:icon="@drawable/ic_launcher"
+        android:theme="@android:style/Theme.DeviceDefault.DayNight"
+        android:allowBackup="false">
+
         <meta-data android:name="xposedmodule" android:value="true" />
-        <meta-data android:name="xposeddescription" android:value="Multiplies Samsung Health pedometer steps" />
-        <meta-data android:name="xposedminversion" android:value="82" />
+        <meta-data android:name="xposeddescription" android:value="Boost and simulate Samsung Health steps, with live progress" />
+        <meta-data android:name="xposedminversion" android:value="93" />
+        <meta-data android:name="xposedsharedprefs" android:value="true" />
         <meta-data android:name="xposedscope" android:resource="@array/scope" />
+
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="true"
+            android:label="Step Boost"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- Opened from the module's settings button in Vector/LSPosed. -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="de.robv.android.xposed.category.MODULE_SETTINGS" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".StatusReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="com.stepwriter.shealth.STATUS" />
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>
